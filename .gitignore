@@ -63,3 +63,6 @@ typings/
 # javascript bundle and css
 public/bundle.js
 public/style.css
+
+# configuration file
+db/config.js

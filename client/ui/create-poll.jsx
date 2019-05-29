@@ -1,13 +1,13 @@
 import React from "react";
 import PollQuestion from "./poll-question.jsx";
 import PollAnswer from "./poll-answer.jsx";
+import axios from 'axios';
 
 class CreatePoll extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      question: "Question",
       answers: {},
       answerCount: 0,
       invalidFields: {}
@@ -52,6 +52,10 @@ class CreatePoll extends React.Component {
 
   getAnswers() {
     return Object.values(this.state.answers);
+  }
+
+  getBallotInfo() {
+    
   }
 
   submitPoll() {
