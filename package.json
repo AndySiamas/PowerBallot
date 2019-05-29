@@ -1,0 +1,56 @@
+{
+  "name": "andysiamas_personal_website",
+  "version": "1.0.0",
+  "description": "Andy's very own personal website and portfolio!",
+  "main": "index.js",
+  "dependencies": {
+    "forever-monitor": "^1.7.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.4.0",
+    "@babel/plugin-syntax-dynamic-import": "^7.2.0",
+    "@babel/polyfill": "^7.4.4",
+    "@babel/preset-env": "^7.4.2",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.5.0",
+    "axios": "^0.18.0",
+    "babel-loader": "^8.0.5",
+    "concat": "^1.0.3",
+    "express": "^4.16.4",
+    "file-loader": "^3.0.1",
+    "node-sass": "^4.12.0",
+    "nodemailer": "^6.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^7.0.14",
+    "postcss-cli": "^6.1.2",
+    "react": "^16.8.5",
+    "react-dom": "^16.8.5",
+    "react-router": "^5.0.0",
+    "react-router-dom": "^5.0.0",
+    "webpack": "^4.29.6",
+    "webpack-cli": "^3.3.0"
+  },
+  "scripts": {
+    "start-dev": "npm-run-all --parallel start-server watch-react watch-sass",
+    "build": "npm-run-all build-react compile-sass concat-css prefix-css compress-css",
+    "start-server": "nodemon server/server.js",
+    "build-react": "webpack -p",
+    "watch-react": "webpack -d --watch",
+    "watch-sass": "node-sass client/sass/main.scss public/style.css -w",
+    "compile-sass": "node-sass client/sass/main.scss client/css/style.comp.css",
+    "concat-css": "concat -o client/css/style.concat.css client/css/style.comp.css",
+    "prefix-css": "postcss --use autoprefixer -b 'last 10 versions' client/css/style.concat.css -o client/css/style.prefix.css",
+    "compress-css": "node-sass client/css/style.prefix.css public/style.css --output-style compressed"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AndySiamas/PersonalWebsite.git"
+  },
+  "author": "Andy Siamas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AndySiamas/PersonalWebsite/issues"
+  },
+  "homepage": "https://github.com/AndySiamas/PersonalWebsite#readme"
+}

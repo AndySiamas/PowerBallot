@@ -59,3 +59,7 @@ typings/
 
 # next.js build output
 .next
+
+# javascript bundle and css
+public/bundle.js
+public/style.css

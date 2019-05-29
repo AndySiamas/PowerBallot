@@ -1,0 +1,19 @@
+.btn {
+  border: none;
+  border-radius: 5px;
+  color: $color-primary;
+  font-family: $font-primary;
+  box-shadow: $box-shadow-light;
+  font-size: 2rem;
+  cursor: pointer;
+  transition: all .2s;
+  backface-visibility: hidden;
+
+  &:focus, &:active {
+    outline: none;
+  }
+
+  &:hover {
+    transform: scale(1.2);
+  }
+}
