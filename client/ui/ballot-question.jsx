@@ -1,26 +1,17 @@
 import React from "react";
 
-class PollQuestion extends React.Component {
+class BallotQuestion extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      text: "Question",
       isValid: true
     };
   }
   
   changeText({target}) {
-  	this.setState({ text: target.value });
+  	this.props.modify(target.value);
   	this.autoExpand(target);
-  	
-  	if (target.value.length <= 0 && this.state.isValid) {
-  	  this.props.alertValidity(false, 'question');
-  	  this.setState({ isValid: false });
-  	} else if (target.value.length > 0 && !this.state.isValid) {
-  	  this.props.alertValidity(true, 'question');
-  	  this.setState({ isValid: true });
-  	}
   }
 
   autoExpand(target) {
@@ -34,8 +25,8 @@ class PollQuestion extends React.Component {
       <React.Fragment>
         <textarea
           type="text"
-          className="create-poll__question"
-          value={this.state.text}
+          className="create-ballot__question"
+          value={this.props.text}
           onChange={this.changeText.bind(this)}
         />
         <div className="line-break" />
@@ -44,4 +35,4 @@ class PollQuestion extends React.Component {
   }
 }
 
-export default PollQuestion;
+export default BallotQuestion;

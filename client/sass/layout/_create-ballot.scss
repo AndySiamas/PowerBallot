@@ -1,4 +1,4 @@
-.create-poll {
+.create-ballot {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -53,11 +53,11 @@
     }
   }
 
-  &__answers-box {
+  &__choices-box {
     margin-top: 0.5rem;
   }
 
-  &__answer-container {
+  &__choice-container {
     display: flex;
     flex-direction: row;
     background-color: $color-grey;
@@ -68,7 +68,7 @@
     box-shadow: $box-shadow-light;
   }
 
-  &__answer-checkbox {
+  &__choice-checkbox {
     position: relative;
     flex: 1;
     cursor: pointer;
@@ -87,7 +87,7 @@
     }
   }
 
-  &__answer-text {
+  &__choice-text {
     flex: 10 0;
     color: $color-primary;
     margin-top: 0.5rem;
@@ -107,7 +107,7 @@
     }
   }
 
-  &__add-answer-button {
+  &__add-choice-button {
     width: 2.5rem;
     height: 2.5rem;
     color: $color-primary;
@@ -127,7 +127,7 @@
     }
   }
 
-  &__delete-answer-button {
+  &__delete-choice-button {
     position: relative;
     width: 2rem;
     height: 2rem;
@@ -161,6 +161,6 @@
   }
 }
 
-.answer-fadeout {
+.choice-fadeout {
   animation: fade-out 2s;
 }

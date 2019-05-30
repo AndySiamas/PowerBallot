@@ -1,6 +1,6 @@
 import React from "react";
-import CreatePoll from "./create-poll.jsx";
-import LoadPoll from "./load-poll.jsx";
+import CreateBallot from "./create-ballot.jsx";
+import LoadBallot from "./load-ballot.jsx";
 
 class App extends React.Component {
   constructor(props) {
@@ -18,9 +18,9 @@ class App extends React.Component {
   getPage() {
     switch (this.state.page) {
       case "CREATE":
-        return <CreatePoll switchPage={this.switchPage.bind(this)} />;
+        return <CreateBallot switchPage={this.switchPage.bind(this)} />;
       case "LOAD":
-        return <LoadPoll switchPage={this.switchPage.bind(this)} />;
+        return <LoadBallot switchPage={this.switchPage.bind(this)} />;
     }
   }
 
