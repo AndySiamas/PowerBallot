@@ -22,12 +22,12 @@ class CreateBallot extends React.Component {
   }
   
   async addDefaultChoices() {
-  	await this.addChoice('Option 1');
-  	await this.addChoice('Option 2');
-  	await this.addChoice('Option 3');
+  	await this.addChoice();
+  	await this.addChoice();
+  	await this.addChoice();
   }
   
-  async addChoice(text) {
+  async addChoice(text = '') {
     let index = this.state.choiceCount + 1;
   	let newChoices = { ...this.state.choices };
   	newChoices[index] = { index, text };
@@ -58,12 +58,10 @@ class CreateBallot extends React.Component {
   	if (this.state.invalidFields[index] && newText.length > 0) {
   		newInvalidFields = { ...this.state.invalidFields };
   		delete newInvalidFields[index];
-  		console.log(`field ${index} is now valid`);
   	}
   	else if (!this.state.invalidFields[index] && newText.length <= 0) {
   		newInvalidFields = { ...this.state.invalidFields };
   		newInvalidFields[index] = true;
-  		console.log(`field ${index} is NOT VALID`);
   	}
   	
   	if (newInvalidFields) this.setState({ invalidFields: newInvalidFields });
@@ -113,7 +111,8 @@ class CreateBallot extends React.Component {
           <div className="create-ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
-          <button className="create-ballot__add-choice-button" /> 
+          <button className="create-ballot__add-choice-button" 
+          		  onClick={() => { this.addChoice(); } } /> 
         </div>
         <button className="btn create-ballot__submit-button"
         		onClick={this.submitBallot.bind(this)}> 

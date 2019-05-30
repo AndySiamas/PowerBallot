@@ -35,6 +35,7 @@ class BallotChoice extends React.Component {
       >
         <textarea
           className="create-ballot__choice-text"
+          placeholder="Option"
           value={this.props.text}
           onChange={this.changeText.bind(this)}
         />

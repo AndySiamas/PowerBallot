@@ -1,6 +1,9 @@
 import React from "react";
 import CreateBallot from "./create-ballot.jsx";
-import LoadBallot from "./load-ballot.jsx";
+import VoteBallot from "./vote-ballot.jsx";
+import BallotResults from "./ballot-results.jsx";
+
+import { BrowserRouter, Route } from 'react-router-dom';
 
 class App extends React.Component {
   constructor(props) {
@@ -11,21 +14,14 @@ class App extends React.Component {
     };
   }
 
-  switchPage(newPage) {
-    this.setState({ page: newPage });
-  }
-
-  getPage() {
-    switch (this.state.page) {
-      case "CREATE":
-        return <CreateBallot switchPage={this.switchPage.bind(this)} />;
-      case "LOAD":
-        return <LoadBallot switchPage={this.switchPage.bind(this)} />;
-    }
-  }
-
   render() {
-    return this.getPage();
+    return (
+    	<BrowserRouter>
+    		<Route exact path='/' component={CreateBallot} />
+    		<Route path='/vote' component={VoteBallot} />
+    		<Route path='/results' component={BallotResults} />
+    	</BrowserRouter>
+    );
   }
 }
 
