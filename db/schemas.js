@@ -33,6 +33,7 @@ const ballot = db.define('ballot', {
 	id: {
 		type: sequelize.INTEGER,
 		primaryKey: true,
+		autoIncrement: true,
 		validate: {
 			unique: true
 		}
@@ -51,6 +52,7 @@ const choice = db.define('choice', {
 	id: {
 		type: sequelize.INTEGER,
 		primaryKey: true,
+		autoIncrement: true,
 		validate: {
 			unique: true
 		}
@@ -61,6 +63,10 @@ const choice = db.define('choice', {
 	},
 	text: {
 		type: sequelize.STRING,
+		allowNull: false
+	},
+	position: {
+		type: sequelize.INTEGER,
 		allowNull: false
 	},
 	votes: {

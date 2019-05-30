@@ -11,7 +11,9 @@ class CreateBallot extends React.Component {
       question: 'Question',
       choices: {},
       choiceCount: 0,
-      invalidFields: {}
+      options: {},
+      invalidFields: {},
+      submitted: false
     };
   }
   
@@ -76,7 +78,31 @@ class CreateBallot extends React.Component {
   	  					   delete={this.deleteChoice.bind(this)}/>
   	});
   }
-
+  
+  ballotIsValid() {
+    return Object.keys(this.state.invalidFields).length == 0;
+  }  
+  
+  async submitBallot() {
+  	if (!this.ballotIsValid || this.state.submitted) {
+  		console.log('BALLOT IS INVALID');
+  		return;
+  	}
+  	
+  	this.setState({ submitted: true });
+  
+  	let ballotInfo = {
+  		question: this.state.question,
+  		choices: this.state.choices,
+  		options: this.state.options
+  	}
+  	
+  	let postInfo = await axios.post('/ballots', ballotInfo);
+  	
+  	if (postInfo.statusText === "OK")
+  		console.log(postInfo.data);
+  }
+  
   render() {
     return (
       <div className="create-ballot">
@@ -89,7 +115,10 @@ class CreateBallot extends React.Component {
           </div>
           <button className="create-ballot__add-choice-button" /> 
         </div>
-        <button className="btn create-ballot__submit-button" />
+        <button className="btn create-ballot__submit-button"
+        		onClick={this.submitBallot.bind(this)}> 
+        		Submit 
+        </button>
       </div>
     );
   }

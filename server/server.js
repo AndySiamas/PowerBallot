@@ -3,8 +3,7 @@ const parser = require('body-parser');
 const path = require('path');
 const app = express();
 
-const db = require('../db/dbController.js');
-const schemas = require('../db/schemas.js');
+const ballotHandler = require('./ballotHandler.js');
 
 const PORT = process.env.PORT || 30000;
 const PUBLIC_DIR = path.join(__dirname + '/../public');
@@ -12,9 +11,16 @@ const PUBLIC_DIR = path.join(__dirname + '/../public');
 app.use(express.static(PUBLIC_DIR));
 app.use(parser.json());
 
-app.post('/ballots', (req, res) => {
-	console.log(req.body);
+app.get('/ballots/:id', (req, res) => {
+	let { id } = req.params;
+	console.log(`Tryna get ${id}`);
 	res.end();
+});
+
+app.post('/ballots', (req, res) => {
+	ballotHandler.postBallot(req.body)
+				 .then((newBallotId) => { res.end(JSON.stringify(newBallotId)); })
+				 .catch((err => { console.log(err); }));
 });
 
 
