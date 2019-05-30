@@ -6,7 +6,7 @@ class BallotChoice extends React.Component {
 
     this.state = {
       opacityClass: "choice-visible",
-      fadeoutTime: 1
+      fadeoutTime: 0.5
     };
   }
   
@@ -31,16 +31,16 @@ class BallotChoice extends React.Component {
   render() {
     return (
       <div
-        className={`create-ballot__choice-container ${this.state.opacityClass}`}
+        className={`ballot__choice-container ${this.state.opacityClass}`}
       >
         <textarea
-          className="create-ballot__choice-text"
+          className="ballot__choice-text"
           placeholder="Option"
           value={this.props.text}
           onChange={this.changeText.bind(this)}
         />
-        <div
-          className="create-ballot__delete-choice-button"
+        <button
+          className="circle-btn ballot__delete-choice-button"
           onClick={this.fadeOutAndDelete.bind(this)}
         />
       </div>

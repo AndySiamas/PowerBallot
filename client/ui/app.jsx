@@ -18,8 +18,8 @@ class App extends React.Component {
     return (
     	<BrowserRouter>
     		<Route exact path='/' component={CreateBallot} />
-    		<Route path='/vote' component={VoteBallot} />
-    		<Route path='/results' component={BallotResults} />
+    		<Route path='/vote/' component={VoteBallot} />
+    		<Route path='/results/*' component={BallotResults} />
     	</BrowserRouter>
     );
   }

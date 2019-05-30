@@ -103,18 +103,18 @@ class CreateBallot extends React.Component {
   
   render() {
     return (
-      <div className="create-ballot">
-        <h1 className="create-ballot__header">Create your ballot</h1>
-        <div className="create-ballot__container">
+      <div className="ballot">
+        <h1 className="ballot__header">Create your ballot</h1>
+        <div className="ballot__container">
           <BallotQuestion text={this.state.question} 
           				  modify={this.modifyQuestion.bind(this)}/>
-          <div className="create-ballot__choices-box">
+          <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
-          <button className="create-ballot__add-choice-button" 
+          <button className="circle-btn ballot__add-choice-button" 
           		  onClick={() => { this.addChoice(); } } /> 
         </div>
-        <button className="btn create-ballot__submit-button"
+        <button className="btn ballot__submit-button"
         		onClick={this.submitBallot.bind(this)}> 
         		Submit 
         </button>

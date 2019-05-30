@@ -25,7 +25,7 @@ class BallotQuestion extends React.Component {
       <React.Fragment>
         <textarea
           type="text"
-          className="create-ballot__question"
+          className="ballot__question"
           value={this.props.text}
           onChange={this.changeText.bind(this)}
         />
