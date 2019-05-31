@@ -27,10 +27,10 @@ class CreateBallot extends React.Component {
   	await this.addChoice();
   }
   
-  async addChoice(text = '') {
+  async addChoice(text = 'Option') {
     let index = this.state.choiceCount + 1;
   	let newChoices = { ...this.state.choices };
-  	newChoices[index] = { index, text };
+  	newChoices[index] = { index, text, isValid: false };
   	return this.setState({ choices : newChoices, choiceCount: index }); 
   }
   
@@ -54,17 +54,29 @@ class CreateBallot extends React.Component {
   
   checkFieldValidity(index, newText) {
     let newInvalidFields = null;
+    let choices = null;
     
   	if (this.state.invalidFields[index] && newText.length > 0) {
   		newInvalidFields = { ...this.state.invalidFields };
   		delete newInvalidFields[index];
+  		
+  		if (index != 'question') {
+  			choices = { ...this.state.choices };
+  			choices[index].isValid = true;
+  		}
   	}
   	else if (!this.state.invalidFields[index] && newText.length <= 0) {
   		newInvalidFields = { ...this.state.invalidFields };
   		newInvalidFields[index] = true;
+  		
+  		if (index != 'question') {
+  			choices = { ...this.state.choices };
+  			choices[index].isValid = false;
+  		}
   	}
   	
-  	if (newInvalidFields) this.setState({ invalidFields: newInvalidFields });
+  	if (newInvalidFields && choices) 
+  		this.setState({ invalidFields: newInvalidFields, choices: choices });
   }
   
   getChoicesAsComponents() {
@@ -72,8 +84,9 @@ class CreateBallot extends React.Component {
   	  return <BallotChoice index={choice.index}
   	  					   key={choice.index} 
   	  					   text={choice.text}
+  	  					   isValid={choice.isValid}
   	  					   modify={this.modifyChoice.bind(this)} 
-  	  					   delete={this.deleteChoice.bind(this)}/>
+  	  					   delete={this.deleteChoice.bind(this)} />
   	});
   }
   

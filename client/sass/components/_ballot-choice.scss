@@ -1,0 +1,79 @@
+.ballot {
+  &__choice-container {
+    display: flex;
+    flex-direction: row;
+    background-color: $color-grey;
+    align-items: center;
+    margin: 1rem 0;
+    padding: 1rem;
+    border-radius: 5px;
+    box-shadow: $box-shadow-light;
+  }
+
+  &__choice-checkbox {
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      background-color: $color-primary;
+    }
+  }
+
+  &__choice-text {
+    flex: 1 0;
+    color: $color-primary;
+    margin-top: 0.5rem;
+    border: none;
+    background-color: transparent;
+    font-family: $font-primary;
+    font-size: 1.5rem;
+    min-width: 90%;
+    max-width: 90%;
+    min-height: 2rem;
+    max-height: 5rem;
+    height: 2rem;
+    resize: none;	// resizing is automatic
+
+    &:active, &:focus {
+      outline: none;
+    }
+  }
+  
+  &__delete-choice-container {
+  	display: flex;
+  	flex: 2 0;
+  	justify-content: flex-end;
+  }  
+  
+  &__delete-choice-button {
+    position: relative;
+    border: 2px solid $color-primary;
+    width: 2rem;
+    height: 2rem;
+    transition: all .2s;
+    transform: scale(1) translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  
+  &__delete-choice-icon {
+  	display: block;
+  	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+    height: 0.7rem;
+    width: 2rem;
+    transition: all .2s;
+    fill: $color-primary;
+  }
+}

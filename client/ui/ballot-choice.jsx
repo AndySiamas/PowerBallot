@@ -1,4 +1,5 @@
 import React from "react";
+import Icons from './icons.jsx';
 
 class BallotChoice extends React.Component {
   constructor(props) {
@@ -39,10 +40,15 @@ class BallotChoice extends React.Component {
           value={this.props.text}
           onChange={this.changeText.bind(this)}
         />
-        <button
-          className="circle-btn ballot__delete-choice-button"
-          onClick={this.fadeOutAndDelete.bind(this)}
-        />
+        <div className="ballot__delete-choice-container">
+        	<button
+          		className="circle-btn ballot__delete-choice-button"
+          		onClick={this.fadeOutAndDelete.bind(this)}>
+          			<svg className="ballot__delete-choice-icon">
+            			<use xlinkHref={Icons.MINUS}></use>
+            		</svg>
+        	</button>
+        </div>
       </div>
     );
   }

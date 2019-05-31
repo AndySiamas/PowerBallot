@@ -43,6 +43,74 @@ body {
   font-family: 'Acme', sans-serif;
   color: white; }
 
+.ballot__choice-container {
+  display: flex;
+  flex-direction: row;
+  background-color: #e6e6e6;
+  align-items: center;
+  margin: 1rem 0;
+  padding: 1rem;
+  border-radius: 5px;
+  box-shadow: 0.1rem 0.25rem 0.15rem rgba(0, 0, 0, 0.15); }
+
+.ballot__choice-checkbox {
+  position: relative;
+  cursor: pointer; }
+  .ballot__choice-checkbox::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    background-color: #ff6059; }
+
+.ballot__choice-text {
+  flex: 1 0;
+  color: #ff6059;
+  margin-top: 0.5rem;
+  border: none;
+  background-color: transparent;
+  font-family: "Acme";
+  font-size: 1.5rem;
+  min-width: 90%;
+  max-width: 90%;
+  min-height: 2rem;
+  max-height: 5rem;
+  height: 2rem;
+  resize: none; }
+  .ballot__choice-text:active, .ballot__choice-text:focus {
+    outline: none; }
+
+.ballot__delete-choice-container {
+  display: flex;
+  flex: 2 0;
+  justify-content: flex-end; }
+
+.ballot__delete-choice-button {
+  position: relative;
+  border: 2px solid #ff6059;
+  width: 2rem;
+  height: 2rem;
+  transition: all .2s;
+  transform: scale(1) translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden; }
+
+.ballot__delete-choice-icon {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1) translateZ(0);
+  height: 0.7rem;
+  width: 2rem;
+  transition: all .2s;
+  fill: #ff6059; }
+
 .btn {
   border: none;
   border-radius: 5px;
@@ -60,6 +128,7 @@ body {
 
 .circle-btn {
   border-radius: 50%;
+  background-color: transparent;
   cursor: pointer;
   backface-visibility: hidden; }
   .circle-btn:active, .circle-btn:focus {
@@ -70,19 +139,19 @@ body {
   width: 100%;
   background-color: #ff6059; }
 
-.create-ballot {
+.ballot {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
   width: 100%; }
-  .create-ballot__header {
+  .ballot__header {
     font-size: 4rem;
     margin-bottom: 2rem;
     user-select: none;
     animation: scale-and-fade-in 1s; }
-  .create-ballot__container {
+  .ballot__container {
     display: flex;
     flex-direction: column;
     padding: 2rem;
@@ -94,7 +163,7 @@ body {
     box-shadow: 0.1rem 0.25rem 0.15rem rgba(0, 0, 0, 0.15);
     animation: fade-in-and-move-up 1s;
     transition: all .2s; }
-  .create-ballot__question {
+  .ballot__question {
     font-family: "Acme";
     min-width: 100%;
     max-width: 100%;
@@ -106,76 +175,36 @@ body {
     color: #ff6059;
     border: none;
     resize: none; }
-    .create-ballot__question::before {
+    .ballot__question::before {
       content: "";
       display: block;
       background-color: grey;
       width: 50%;
       height: 1px; }
-    .create-ballot__question:active, .create-ballot__question:focus {
+    .ballot__question:active, .ballot__question:focus {
       outline: none; }
-  .create-ballot__choices-box {
+  .ballot__choices-box {
     margin-top: 0.5rem; }
-  .create-ballot__choice-container {
-    display: flex;
-    flex-direction: row;
-    background-color: #e6e6e6;
-    align-items: center;
-    margin: 1rem 0;
-    padding: 1rem;
-    border-radius: 5px;
-    box-shadow: 0.1rem 0.25rem 0.15rem rgba(0, 0, 0, 0.15); }
-  .create-ballot__choice-checkbox {
+  .ballot__add-choice-button {
     position: relative;
-    flex: 1;
-    cursor: pointer; }
-    .create-ballot__choice-checkbox::after {
+    border: 2px solid #ff6059;
+    width: 2.5rem;
+    height: 2.5rem;
+    transition: all .2s;
+    background-color: transparent;
+    backface-visibility: hidden; }
+    .ballot__add-choice-button::before {
       content: "";
       display: block;
       position: absolute;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      width: 1.5rem;
-      height: 1.5rem;
-      border-radius: 50%;
-      background-color: #ff6059; }
-  .create-ballot__choice-text {
-    flex: 10 0;
-    color: #ff6059;
-    margin-top: 0.5rem;
-    border: none;
-    background-color: transparent;
-    font-family: "Acme";
-    font-size: 1.5rem;
-    min-width: 95%;
-    max-width: 95%;
-    min-height: 2rem;
-    max-height: 5rem;
-    height: 2rem;
-    resize: none; }
-    .create-ballot__choice-text:active, .create-ballot__choice-text:focus {
-      outline: none; }
-  .create-ballot__add-choice-button {
-    width: 2.5rem;
-    height: 2.5rem;
-    color: #ff6059;
-    font-size: 1rem;
-    border: 2px solid #ff6059;
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all .2s;
-    transform: scale(1);
-    backface-visibility: hidden; }
-    .create-ballot__add-choice-button:hover {
-      transform: scale(1.1); }
-  .create-ballot__delete-choice-button {
-    position: relative;
-    border: 2px solid #ff6059;
-    width: 2rem;
-    height: 2rem;
-    transition: all .2s; }
-    .create-ballot__delete-choice-button::after {
+      width: 10%;
+      height: 50%;
+      background-color: #ff6059;
+      backface-visibility: hidden; }
+    .ballot__add-choice-button::after {
       content: "";
       display: block;
       position: absolute;
@@ -184,16 +213,15 @@ body {
       transform: translate(-50%, -50%);
       width: 50%;
       height: 10%;
-      background-color: #ff6059; }
-    .create-ballot__delete-choice-button:hover {
-      transform: scale(1.2); }
-  .create-ballot__submit-button {
+      background-color: #ff6059;
+      backface-visibility: hidden; }
+  .ballot__submit-button {
     width: 20rem;
     height: 5rem;
     animation: scale-and-fade-in 1s; }
 
 .choice-fadeout {
-  animation: fade-out 2s; }
+  animation: fade-out 1s; }
 
 .load-ballot {
   display: flex;
