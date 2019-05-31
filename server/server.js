@@ -18,8 +18,9 @@ app.use(parser.json());
 
 app.get('/ballots/:id', (req, res) => {
 	let { id } = req.params;
-	console.log(`Tryna get ${id}`);
-	res.end();
+	ballotHandler.getBallot(id)
+				 .then((ballotInfo) => { res.end(JSON.stringify(ballotInfo)); })
+				 .catch((err => { console.log(err); }));
 });
 
 app.post('/ballots', (req, res) => {

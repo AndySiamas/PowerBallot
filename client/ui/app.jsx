@@ -1,7 +1,7 @@
 import React from "react";
-import CreateBallot from "./create-ballot.jsx";
-import VoteBallot from "./vote-ballot.jsx";
-import BallotResults from "./ballot-results.jsx";
+import CreateBallot from "./pages/create-ballot.jsx";
+import VoteBallot from "./pages/vote-ballot.jsx";
+import BallotResults from "./pages/ballot-results.jsx";
 
 import { BrowserRouter, Route } from 'react-router-dom';
 

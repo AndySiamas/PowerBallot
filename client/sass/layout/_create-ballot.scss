@@ -40,14 +40,6 @@
     border: none;
     resize: none;	// resizing is automatic
 
-    &::before {
-      content: "";
-      display: block;
-      background-color: grey;
-      width: 50%;
-      height: 1px;
-    }
-
     &:active, &:focus {
       outline: none;
     }

@@ -35,4 +35,11 @@ handler.postChoice = async(choiceInfo) => {
 	});
 }
 
+handler.getBallot = async(ballotId) => {
+	let ballotInfo = {};
+	ballotInfo.ballot = await ballot.findOne({ where: { id: ballotId }});	  
+	ballotInfo.choices = await choice.findAll({ where: { ballotId: ballotId }});			  
+	return ballotInfo;
+}
+
 module.exports = handler;

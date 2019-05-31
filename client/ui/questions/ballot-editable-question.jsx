@@ -1,6 +1,6 @@
 import React from "react";
 
-class BallotQuestion extends React.Component {
+class BallotEditableQuestion extends React.Component {
   constructor(props) {
     super(props);
 
@@ -35,4 +35,4 @@ class BallotQuestion extends React.Component {
   }
 }
 
-export default BallotQuestion;
+export default BallotEditableQuestion;

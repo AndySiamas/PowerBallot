@@ -1,7 +1,7 @@
 import React from "react";
-import Icons from './icons.jsx';
+import Icons from '../utilities/icons.jsx';
 
-class BallotChoice extends React.Component {
+class BallotVotableChoice extends React.Component {
   constructor(props) {
     super(props);
 
@@ -54,4 +54,4 @@ class BallotChoice extends React.Component {
   }
 }
 
-export default BallotChoice;
+export default BallotVotableChoice;

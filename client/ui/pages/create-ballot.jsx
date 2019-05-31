@@ -1,6 +1,6 @@
 import React from "react";
-import BallotQuestion from "./ballot-question.jsx";
-import BallotChoice from "./ballot-choice.jsx";
+import BallotQuestion from "../questions/ballot-editable-question.jsx";
+import BallotEditableChoice from "../choices/ballot-editable-choice.jsx";
 import axios from 'axios';
 
 class CreateBallot extends React.Component {
@@ -81,7 +81,7 @@ class CreateBallot extends React.Component {
   
   getChoicesAsComponents() {
   	return Object.values(this.state.choices).map((choice) => {
-  	  return <BallotChoice index={choice.index}
+  	  return <BallotEditableChoice index={choice.index}
   	  					   key={choice.index} 
   	  					   text={choice.text}
   	  					   isValid={choice.isValid}
