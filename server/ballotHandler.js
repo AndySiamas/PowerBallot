@@ -35,6 +35,25 @@ handler.postChoice = async(choiceInfo) => {
 	});
 }
 
+handler.incrementChoices = async(choiceIds) => {
+	let choices = Object.keys(choiceIds);
+	let choicePromises = [];
+	
+	choices.forEach((id) => {
+		choicePromises.push(handler.updateChoice(id));
+	});
+	
+	let completed = await Promise.all(choicePromises);
+	return completed;
+}
+
+handler.updateChoice = async(id) => {
+	let wantedChoice = await choice.findOne({ where: { id: id }});
+	let choiceVotes = wantedChoice.dataValues.votes;
+	let updated = await wantedChoice.update({ votes: choiceVotes + 1 });
+	return updated;
+}
+
 handler.getBallot = async(ballotId) => {
 	let ballotInfo = {};
 	ballotInfo.ballot = await ballot.findOne({ where: { id: ballotId }});	  

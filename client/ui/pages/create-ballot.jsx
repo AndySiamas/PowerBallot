@@ -1,7 +1,8 @@
 import React from "react";
 import BallotQuestion from "../questions/ballot-editable-question.jsx";
 import BallotEditableChoice from "../choices/ballot-editable-choice.jsx";
-import axios from 'axios';
+import Icons from "../utilities/icons.jsx";
+import Axios from 'axios';
 
 class CreateBallot extends React.Component {
   constructor(props) {
@@ -108,10 +109,11 @@ class CreateBallot extends React.Component {
   		options: this.state.options
   	}
   	
-  	let postInfo = await axios.post('/ballots', ballotInfo);
+  	let postInfo = await Axios.post('/ballots', ballotInfo);
   	
-  	if (postInfo.statusText === "OK")
-  		console.log(postInfo.data);
+  	if (postInfo.statusText === "OK") {
+  		window.location.href = `/vote/${postInfo.data}`;
+  	}
   }
   
   render() {
@@ -125,9 +127,13 @@ class CreateBallot extends React.Component {
           	{ this.getChoicesAsComponents() }
           </div>
           <button className="circle-btn ballot__add-choice-button" 
-          		  onClick={() => { this.addChoice(); } } /> 
+          		  onClick={() => { this.addChoice(); } } >
+          		  	<svg className="ballot__add-choice-icon">
+          		  		<use xlinkHref={Icons.PLUS}></use>
+          		  	</svg> 
+          </button>
         </div>
-        <button className="btn ballot__submit-button"
+        <button className="main-btn ballot__submit-button"
         		onClick={this.submitBallot.bind(this)}> 
         		Submit 
         </button>

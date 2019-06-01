@@ -8,6 +8,7 @@ class VoteBallot extends React.Component {
     super(props);
     
 	this.state = {
+	  ballotId: 0,
       question: 'Question',
       choices: {},
       selectedChoices: {},
@@ -25,8 +26,9 @@ class VoteBallot extends React.Component {
   	let { data } = await Axios.get(`${origin}/ballots/${ballotId}`);
   	
   	if (data.ballot != null) {
-  		this.setState({ question: data.ballot.question,
-  						choices: this.sortChoices(data.choices) });
+  		this.setState({ ballotId: ballotId,
+  						question: data.ballot.question,
+  						choices:  this.sortChoices(data.choices) });
   	}
   }
   
@@ -37,14 +39,12 @@ class VoteBallot extends React.Component {
   }
   
   toggleChoice(id, selected) {
-  	let selectedChoices = { ...selectedChoices };
-  	
+  	let selectedChoices = { ...this.state.selectedChoices };
   	if (selected) {
   		selectedChoices[id] = true;
   	} else {
-  		selectedChoices[id] = false;
+  		delete selectedChoices[id];
   	}
-  	
   	this.setState({ selectedChoices: selectedChoices });
   }
   
@@ -55,6 +55,24 @@ class VoteBallot extends React.Component {
   	  						 		text={choice.text} 
   	  						 		toggle={this.toggleChoice.bind(this)}/>
   		});
+  }
+  
+  saveStateToSessionStorage() {
+  	let { ballotId, question, choices } = this.state;
+  	let dataToSave = { ballotId, question, choices };
+  	sessionStorage.setItem(`${this.state.ballotId}`, JSON.stringify(dataToSave));
+  }
+
+  async submitVote() {
+    let selectedChoiceIds = Object.keys(this.state.selectedChoices);
+  	if (selectedChoiceIds.length <= 0) return false;
+  	
+  	let data = await Axios.post('/votes', this.state.selectedChoices);
+  	
+  	if (data.statusText == "OK") {
+  		this.saveStateToSessionStorage();
+  		window.location.href = `/results/${this.state.ballotId}`;
+  	}
   }
 
   render() {
@@ -67,6 +85,10 @@ class VoteBallot extends React.Component {
           	{ this.getChoicesAsComponents() }
           </div>
         </div>
+        <button className="main-btn ballot__submit-button"
+        		onClick={this.submitVote.bind(this)}> 
+        		Vote 
+        </button>
       </div>
     );
   }

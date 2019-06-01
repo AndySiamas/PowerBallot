@@ -27,8 +27,8 @@ class BallotEditableChoice extends React.Component {
 
   render() {
     return (
-      <div className="ballot__choice-container choice-selectable">
-      	<div className="ballot__choice-checkbox" onClick={this.toggleBox.bind(this)}>
+      <div className="ballot__choice-container choice-selectable" onClick={this.toggleBox.bind(this)}>
+      	<div className="ballot__choice-checkbox">
       		{ this.getCheckmark() }
       	</div>
         <p className="ballot__choice-text choice-not-editable">
