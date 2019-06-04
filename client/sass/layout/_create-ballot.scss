@@ -5,6 +5,7 @@
   align-items: center;
   min-height: 100vh;
   width: 100%;
+  margin: 4rem;
 
   &__header {
     font-size: 4rem;
@@ -32,10 +33,8 @@
     min-width: 100%;
     max-width: 100%;
     min-height: 4rem;
-    max-height: 50vh;
-    height: 4rem;
     font-size: 3rem;
-    word-break: break-all;
+    word-break: break-word;
     color: $color-primary;
     border: none;
     resize: none;	// resizing is automatic

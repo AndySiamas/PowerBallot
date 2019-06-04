@@ -1,14 +1,19 @@
 import React from "react";
 
-class BallotEditableQuestion extends React.Component {
+class BallotReadonlyQuestion extends React.Component {
   constructor(props) {
     super(props);
+  }
+  
+  componentDidMount() {
+    let { question } = this.refs;
+  	question.style.removeProperty('height');
   }
   
   render() {
     return (
       <React.Fragment>
-        <p className="ballot__question">
+        <p className="ballot__question" ref="question">
         	{ this.props.text }
         </p>
         <div className="line-break" />
@@ -17,4 +22,4 @@ class BallotEditableQuestion extends React.Component {
   }
 }
 
-export default BallotEditableQuestion;
+export default BallotReadonlyQuestion;

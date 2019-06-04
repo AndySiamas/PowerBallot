@@ -11,6 +11,10 @@ class BallotVotableChoice extends React.Component {
     };
   }
   
+  componentDidMount() {
+  	this.autoExpand(this.refs['text']);
+  }
+  
   changeText({target}) {
   	this.props.modify(this.props.index, target.value);
   	this.autoExpand(target);
@@ -39,6 +43,7 @@ class BallotVotableChoice extends React.Component {
           placeholder="Option"
           value={this.props.text}
           onChange={this.changeText.bind(this)}
+          ref="text"
         />
         <div className="ballot__delete-choice-container">
         	<button

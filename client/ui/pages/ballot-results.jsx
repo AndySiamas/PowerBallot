@@ -1,6 +1,6 @@
 import React from "react";
 import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
-import BallotVotableChoice from "../choices/ballot-votable-choice.jsx";
+import BallotReadonlyChoice from "../choices/ballot-readonly-choice.jsx";
 import Axios from 'axios';
 
 class BallotResults extends React.Component {
@@ -10,37 +10,57 @@ class BallotResults extends React.Component {
     this.state = {
 	  ballotId: 0,
       question: 'Question',
-      choices: {}
+      choices: {},
+      totalVotes: 0
     };
   }
   
   componentDidMount() {
-    this.loadBallotFromServer();
+    this.loadBallotFromSessionStorage();
   }
   
   async loadBallotFromSessionStorage() {
   	let ballotId = window.location.pathname.split('/')[2];
-  	let newState = JSON.parse(sessionStorage.getItem(`${ballotId}`));
+  	let storedBallotInfo = JSON.parse(sessionStorage.getItem(`${ballotId}`));
   	
-  	if (newState) {
-  		this.setState({ ballotId: newState.ballotId,
-  					    question: newState.question,
-  					    choices: newState.choices });
-  	} else {
+  	if (!storedBallotInfo) {
   		this.loadBallotFromServer();
+  		return;
   	}
+  	
+  	let updatedChoices = this.getChoicesWithPercentage(storedBallotInfo.choices);
+  	
+  	this.setState({ ballotId: storedBallotInfo.ballotId,
+  					question: storedBallotInfo.question,
+  					choices:  updatedChoices });
   }
   
   async loadBallotFromServer() {
   	let origin = window.location.origin;
   	let ballotId = window.location.pathname.split('/')[2];
   	let { data } = await Axios.get(`${origin}/ballots/${ballotId}`);
+  	let choicesWithPercents = this.getChoicesWithPercentage(data.choices);
   	
   	if (data.ballot != null) {
   		this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
-  						choices:  this.sortChoices(data.choices) });
+  						choices:  choicesWithPercents });
   	}
+  }
+  
+  getChoicesWithPercentage(choices) {
+  	var totalVotes = 0;
+  	
+  	choices.forEach((choice) => {
+  		totalVotes += choice.votes;
+  	});
+  	
+  	let newChoices = choices.map((choice) => {
+  		return { ...choice,
+  				 percentage: (choice.votes / totalVotes).toFixed(3) };
+  	});
+  	
+  	return newChoices;
   }
   
   sortChoices(choices) {
@@ -49,22 +69,13 @@ class BallotResults extends React.Component {
   	});
   }
   
-  toggleChoice(id, selected) {
-  	let selectedChoices = { ...this.state.selectedChoices };
-  	if (selected) {
-  		selectedChoices[id] = true;
-  	} else {
-  		delete selectedChoices[id];
-  	}
-  	this.setState({ selectedChoices: selectedChoices });
-  }
-  
   getChoicesAsComponents() {
   	return Object.values(this.state.choices).map((choice) => {
-  	  	return <BallotVotableChoice index={choice.id}
-  	  						 		key={choice.id} 
-  	  						 		text={choice.text} 
-  	  						 		toggle={this.toggleChoice.bind(this)}/>
+  	  	return <BallotReadonlyChoice index={choice.id}
+  	  						 		 key={choice.id} 
+  	  						 		 text={choice.text}
+  	  						 		 votes={choice.votes}
+  	  						 		 percentage={choice.percentage} />
   		});
   }
 

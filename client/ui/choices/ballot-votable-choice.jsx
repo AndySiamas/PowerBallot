@@ -31,7 +31,7 @@ class BallotEditableChoice extends React.Component {
       	<div className="ballot__choice-checkbox">
       		{ this.getCheckmark() }
       	</div>
-        <p className="ballot__choice-text choice-not-editable">
+        <p className="ballot__choice-text choice-not-editable" ref="text">
         	{ this.props.text }
         </p>
       </div>

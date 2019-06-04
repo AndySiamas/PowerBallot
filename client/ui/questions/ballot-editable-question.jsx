@@ -9,6 +9,10 @@ class BallotEditableQuestion extends React.Component {
     };
   }
   
+  componentDidMount() {
+  	this.autoExpand(this.refs['question']);	// set default height on load
+  }
+  
   changeText({target}) {
   	this.props.modify(target.value);
   	this.autoExpand(target);
@@ -28,6 +32,7 @@ class BallotEditableQuestion extends React.Component {
           className="ballot__question"
           value={this.props.text}
           onChange={this.changeText.bind(this)}
+          ref="question"
         />
         <div className="line-break" />
       </React.Fragment>
