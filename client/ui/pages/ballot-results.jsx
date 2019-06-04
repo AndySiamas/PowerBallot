@@ -11,12 +11,13 @@ class BallotResults extends React.Component {
 	  ballotId: 0,
       question: 'Question',
       choices: {},
-      totalVotes: 0
+      updateInterval: 3000
     };
   }
   
   componentDidMount() {
-    this.loadBallotFromSessionStorage();
+    this.loadBallotFromServer();
+    this.setUpdateBallotInterval();
   }
   
   async loadBallotFromSessionStorage() {
@@ -28,24 +29,31 @@ class BallotResults extends React.Component {
   		return;
   	}
   	
-  	let updatedChoices = this.getChoicesWithPercentage(storedBallotInfo.choices);
+  	let choicesWithPercents = this.getChoicesWithPercentage(storedBallotInfo.choices);
+  	let sortedChoices = this.sortChoicesByVotes(choicesWithPercents);
   	
   	this.setState({ ballotId: storedBallotInfo.ballotId,
   					question: storedBallotInfo.question,
-  					choices:  updatedChoices });
+  					choices:  sortedChoices });
+  					
+  	return sortedChoices;
   }
   
   async loadBallotFromServer() {
   	let origin = window.location.origin;
   	let ballotId = window.location.pathname.split('/')[2];
   	let { data } = await Axios.get(`${origin}/ballots/${ballotId}`);
+  	
   	let choicesWithPercents = this.getChoicesWithPercentage(data.choices);
+  	let sortedChoices = this.sortChoicesByVotes(choicesWithPercents);
   	
   	if (data.ballot != null) {
   		this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
-  						choices:  choicesWithPercents });
+  						choices:  sortedChoices });
   	}
+  	
+  	return sortedChoices;
   }
   
   getChoicesWithPercentage(choices) {
@@ -55,18 +63,22 @@ class BallotResults extends React.Component {
   		totalVotes += choice.votes;
   	});
   	
-  	let newChoices = choices.map((choice) => {
+  	let choicesWithPercent = choices.map((choice) => {
   		return { ...choice,
-  				 percentage: (choice.votes / totalVotes).toFixed(3) };
+  				 percentage: (choice.votes / totalVotes) };
   	});
   	
-  	return newChoices;
+  	return choicesWithPercent;
   }
   
-  sortChoices(choices) {
+  sortChoicesByVotes(choices) {
   	return choices.sort((a, b) => {
-  		return a.position - b.position;
+  		return b.votes - a.votes;
   	});
+  }
+  
+  setUpdateBallotInterval() {
+  	setInterval(this.loadBallotFromServer.bind(this), this.state.updateInterval);
   }
   
   getChoicesAsComponents() {
