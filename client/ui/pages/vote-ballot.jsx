@@ -81,9 +81,21 @@ class VoteBallot extends React.Component {
   		});
   }
 
+  verifyVote() {
+  	if (this.state.usersCanVoteMultipleTimes) return true;
+  	
+    let userDidVote = localStorage.getItem(`ballot ${this.state.ballotId}`) || false;
+    if (!userDidVote) {
+    	localStorage.setItem(`ballot ${this.state.ballotId}`, true);
+    	return true;
+    }
+    
+    return false;
+  }
+
   async submitVote() {
     let selectedChoiceIds = Object.keys(this.state.selectedChoices);
-  	if (selectedChoiceIds.length <= 0) return false;
+  	if (selectedChoiceIds.length <= 0 || !this.verifyVote()) return false;
   	
   	let data = await Axios.post('/votes', this.state.selectedChoices);
   	if (data.statusText == "OK") this.goToResultsPage();
