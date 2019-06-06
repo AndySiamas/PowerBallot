@@ -1,23 +1,18 @@
 * CREATE PAGE
-X Add options
+- 
 
 
 * VOTE PAGE
-X Enforce options
-X Show what options are there
 - Add asked date
 - Add share feature
-X Add go to results screen
 
 
 * RESULTS PAGE
 - Add asked date
 - Add share feature
-x Adjust percentage bar on update
-X Fix display of votes and percentage
 
 
 * GENERAL
 - ADD MEDIA QUERIES
 - Create error page
-- Create ballot does not exist page
+- Spice up ballot does not exist page
