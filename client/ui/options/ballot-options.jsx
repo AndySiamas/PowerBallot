@@ -11,12 +11,14 @@ class BallotOptions extends React.Component {
     return (
       <div className="ballot-options">
       
-      	<button className="ballot-options__add-choice-button circle-btn"
-      			onClick={() => { this.props.addChoice() }}>
-          	<svg className="ballot-options__add-choice-icon">
-          		<use xlinkHref={Icons.PLUS}></use>
-          	</svg> 
-        </button>
+        <div className="ballot-options__add-choice-button-container">
+      		<button className="ballot-options__add-choice-button circle-btn"
+      				onClick={() => { this.props.addChoice() }}>
+          		<svg className="ballot-options__add-choice-icon">
+          			<use xlinkHref={Icons.PLUS}></use>
+          		</svg> 
+        	</button>
+        </div>
         
         <Option text="Users can vote multiple times"
         		index="usersCanVoteMultipleTimes" 

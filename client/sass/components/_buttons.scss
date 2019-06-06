@@ -8,6 +8,7 @@
   cursor: pointer;
   transition: all .2s;
   backface-visibility: hidden;
+  margin-bottom: 1rem;
 
   &:focus, &:active {
     outline: none;

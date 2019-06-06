@@ -1,9 +1,9 @@
 * CREATE PAGE
-- Add options
+X Add options
 
 
 * VOTE PAGE
-- Enforce options
+X Enforce options
 - Show what options are there
 - Add asked date
 - Add share feature

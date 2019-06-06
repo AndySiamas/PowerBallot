@@ -20,25 +20,6 @@ class BallotResults extends React.Component {
     this.setUpdateBallotInterval();
   }
   
-  async loadBallotFromSessionStorage() {
-  	let ballotId = window.location.pathname.split('/')[2];
-  	let storedBallotInfo = JSON.parse(sessionStorage.getItem(`${ballotId}`));
-  	
-  	if (!storedBallotInfo) {
-  		this.loadBallotFromServer();
-  		return;
-  	}
-  	
-  	let choicesWithPercents = this.getChoicesWithPercentage(storedBallotInfo.choices);
-  	let sortedChoices = this.sortChoicesByVotes(choicesWithPercents);
-  	
-  	this.setState({ ballotId: storedBallotInfo.ballotId,
-  					question: storedBallotInfo.question,
-  					choices:  sortedChoices });
-  					
-  	return sortedChoices;
-  }
-  
   async loadBallotFromServer() {
   	let origin = window.location.origin;
   	let ballotId = window.location.pathname.split('/')[2];
@@ -65,7 +46,7 @@ class BallotResults extends React.Component {
   	
   	let choicesWithPercent = choices.map((choice) => {
   		return { ...choice,
-  				 percentage: (choice.votes / totalVotes) };
+  				 percentage: (choice.votes / totalVotes) || 0 };
   	});
   	
   	return choicesWithPercent;

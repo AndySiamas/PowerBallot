@@ -1,6 +1,7 @@
 import React from "react";
 import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotVotableChoice from "../choices/ballot-votable-choice.jsx";
+import PB_Button from "../utilities/pb-button.jsx";
 import Axios from 'axios';
 
 class VoteBallot extends React.Component {
@@ -79,23 +80,18 @@ class VoteBallot extends React.Component {
   	  						 		selected={choice.selected} />
   		});
   }
-  
-  saveStateToSessionStorage() {
-  	let { ballotId, question, choices } = this.state;
-  	let dataToSave = { ballotId, question, choices };
-  	sessionStorage.setItem(`${this.state.ballotId}`, JSON.stringify(dataToSave));
-  }
 
   async submitVote() {
     let selectedChoiceIds = Object.keys(this.state.selectedChoices);
   	if (selectedChoiceIds.length <= 0) return false;
   	
   	let data = await Axios.post('/votes', this.state.selectedChoices);
-  	
-  	if (data.statusText == "OK") {
-  		this.saveStateToSessionStorage();
-  		window.location.href = `/results/${this.state.ballotId}`;
-  	}
+  	if (data.statusText == "OK") this.goToResultsPage();
+  	return data;
+  }
+  
+  async goToResultsPage() {
+  	window.location.href = `/results/${this.state.ballotId}`;
   }
 
   render() {
@@ -108,10 +104,8 @@ class VoteBallot extends React.Component {
           	{ this.getChoicesAsComponents() }
           </div>
         </div>
-        <button className="main-btn ballot__submit-button"
-        		onClick={this.submitVote.bind(this)}> 
-        		Vote 
-        </button>
+        <PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
+        <PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
       </div>
     );
   }

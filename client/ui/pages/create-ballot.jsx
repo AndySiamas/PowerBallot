@@ -2,6 +2,7 @@ import React from "react";
 import BallotQuestion from "../questions/ballot-editable-question.jsx";
 import BallotEditableChoice from "../choices/ballot-editable-choice.jsx";
 import BallotOptions from "../options/ballot-options.jsx";
+import PB_Button from "../utilities/pb-button.jsx";
 import Icons from "../utilities/icons.jsx";
 import Axios from 'axios';
 
@@ -138,18 +139,20 @@ class CreateBallot extends React.Component {
       <div className="ballot">
         <h1 className="ballot__header">Create your ballot</h1>
         <div className="ballot__container">
+        
           <BallotQuestion text={this.state.question} 
-          				  modify={this.modifyQuestion.bind(this)}/>
+          				  modify={this.modifyQuestion.bind(this)} />
+          				  
           <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
+          
           <BallotOptions addChoice={this.addChoice.bind(this)} 
-          				 toggleOption={this.toggleOption.bind(this)}/>
+          				 toggleOption={this.toggleOption.bind(this)} />
+          				 
         </div>
-        <button className="main-btn ballot__submit-button"
-        		onClick={this.submitBallot.bind(this)} >
-        		Submit 
-        </button>
+        	
+        <PB_Button text="Submit" onSubmit={this.submitBallot.bind(this)} />
       </div>
     );
   }
