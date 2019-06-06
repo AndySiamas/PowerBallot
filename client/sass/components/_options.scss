@@ -83,4 +83,36 @@
     z-index: 10;
     fill: $color-white;
   }
+  
+  &__readonly-option {
+    display: flex;
+  	flex: 1;
+  	justify-content: center;
+  	align-items: center;
+  	height: 100%;
+  	margin-right: 0.5rem;
+  }
+  
+  &__readonly-option-text {
+    flex: 4;
+    padding: 0.5rem;
+    font-size: 1.5rem;
+    color: $color-dark-grey;
+  }  
+  
+  &__readonly-option-checkbox {
+    position: relative;
+  	flex: 1;
+  }
+  
+  &__readonly-option-checkbox-icon {
+  	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  	height: 1rem;
+    width: 1rem;
+    z-index: 10;
+    fill: $color-dark-grey;
+  }
 }

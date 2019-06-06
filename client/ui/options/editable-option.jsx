@@ -1,7 +1,7 @@
 import React from "react";
 import Icons from "../utilities/icons.jsx";
 
-class Option extends React.Component {
+class EditableOption extends React.Component {
   constructor(props) {
     super(props);
   
@@ -38,4 +38,4 @@ class Option extends React.Component {
   }
 }
 
-export default Option;
+export default EditableOption;

@@ -75,7 +75,7 @@ class BallotResults extends React.Component {
   render() {
     return (
       <div className="ballot">
-        <h1 className="ballot__header">Vote on this ballot</h1>
+        <h1 className="ballot__header">Results</h1>
         <div className="ballot__container">
           <BallotReadonlyQuestion text={this.state.question} />
           <div className="ballot__choices-box">

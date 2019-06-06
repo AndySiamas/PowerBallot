@@ -1,5 +1,5 @@
 import React from "react";
-import Option from "./option.jsx";
+import EditableOption from "./editable-option.jsx";
 import Icons from "../utilities/icons.jsx";
 
 class BallotOptions extends React.Component {
@@ -20,11 +20,11 @@ class BallotOptions extends React.Component {
         	</button>
         </div>
         
-        <Option text="Users can vote multiple times"
+        <EditableOption text="Users can vote multiple times"
         		index="usersCanVoteMultipleTimes" 
         		toggle={this.props.toggleOption}/>
         
-        <Option text="Multiple answers allowed"
+        <EditableOption text="Multiple answers allowed"
         		index="multipleAnswersAllowed" 
         		toggle={this.props.toggleOption}/>
         

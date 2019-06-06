@@ -1,7 +1,9 @@
 import React from "react";
 import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotVotableChoice from "../choices/ballot-votable-choice.jsx";
+import ReadonlyOption from "../options/readonly-option.jsx";
 import PB_Button from "../utilities/pb-button.jsx";
+import BallotNonexistant from './ballot-nonexistant.jsx';
 import Axios from 'axios';
 
 class VoteBallot extends React.Component {
@@ -14,7 +16,8 @@ class VoteBallot extends React.Component {
       choices: {},
       selectedChoices: {},
       multipleAnswersAllowed: false,
-      usersCanVoteMultipleTimes: false
+      usersCanVoteMultipleTimes: false,
+      ballotExists: true
     };
   }
   
@@ -35,8 +38,11 @@ class VoteBallot extends React.Component {
   						question: data.ballot.question,
   						choices:  sortedChoices,
   						multipleAnswersAllowed: data.ballot.multipleAnswersAllowed, 
-  						usersCanVoteMultipleTimes: data.ballot.usersCanVoteMultipleTimes 
+  						usersCanVoteMultipleTimes: data.ballot.usersCanVoteMultipleTimes,
+  						ballotExists: true
   					  });
+  	} else {
+  		this.setState({ ballotExists: false });
   	}
   }
   
@@ -107,6 +113,9 @@ class VoteBallot extends React.Component {
   }
 
   render() {
+    if (!this.state.ballotExists) {
+    	return <BallotNonexistant />
+    } else {
     return (
       <div className="ballot">
         <h1 className="ballot__header">Vote on this ballot</h1>
@@ -115,11 +124,18 @@ class VoteBallot extends React.Component {
           <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
+          <div className="ballot-options">
+          	<ReadonlyOption text={"Users can vote multiple times"} 
+          					selected={this.state.usersCanVoteMultipleTimes}/>
+          	<ReadonlyOption text={"Multiple answers allowed"} 
+          					selected={this.state.multipleAnswersAllowed}/>
+          </div>
         </div>
         <PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
         <PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
       </div>
     );
+    }
   }
 }
 
