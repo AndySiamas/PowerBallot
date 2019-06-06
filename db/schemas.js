@@ -42,7 +42,11 @@ const ballot = db.define('ballot', {
 		type: sequelize.STRING,
 		allowNull: false
 	},
-	multipleChoices: {
+	usersCanVoteMultipleTimes: {
+		type: sequelize.BOOLEAN,
+		allowNull: false
+	},
+	multipleAnswersAllowed: {
 		type: sequelize.BOOLEAN,
 		allowNull: false
 	}

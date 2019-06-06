@@ -1,23 +1,17 @@
 import React from "react";
 import Icons from '../utilities/icons.jsx';
 
-class BallotEditableChoice extends React.Component {
+class BallotVotableChoice extends React.Component {
   constructor(props) {
     super(props);
-    
-    this.state = {
-    	selected: false
-    }
   }
   
   toggleBox() {
-    let newState = !this.state.selected;
-    this.setState({ selected: newState });
-    this.props.toggle(this.props.index, newState);
+    this.props.toggle(this.props.index, this.props.selected);
   }
   
   getCheckmark() {
-  	if (this.state.selected) {
+  	if (this.props.selected) {
   		return (<svg className="ballot__choice-checkbox-icon">
                   <use xlinkHref={Icons.CHECK}></use>
             	</svg>
@@ -39,4 +33,4 @@ class BallotEditableChoice extends React.Component {
   }
 }
 
-export default BallotEditableChoice;
+export default BallotVotableChoice;

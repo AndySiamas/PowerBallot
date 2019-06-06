@@ -12,7 +12,8 @@ class VoteBallot extends React.Component {
       question: 'Question',
       choices: {},
       selectedChoices: {},
-      options: {}
+      multipleAnswersAllowed: false,
+      usersCanVoteMultipleTimes: false
     };
   }
   
@@ -25,11 +26,24 @@ class VoteBallot extends React.Component {
   	let ballotId = window.location.pathname.split('/')[2];
   	let { data } = await Axios.get(`${origin}/ballots/${ballotId}`);
   	
+  	let choicesWithNewProps = this.addPropsToChoices(data.choices);
+  	let sortedChoices = this.sortChoices(choicesWithNewProps);
+  	
   	if (data.ballot != null) {
   		this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
-  						choices:  this.sortChoices(data.choices) });
+  						choices:  sortedChoices,
+  						multipleAnswersAllowed: data.ballot.multipleAnswersAllowed, 
+  						usersCanVoteMultipleTimes: data.ballot.usersCanVoteMultipleTimes 
+  					  });
   	}
+  }
+  
+  addPropsToChoices(choices) {
+  	return choices.map((choice) => {
+  		return { ...choice,
+  				  selected: false };
+  	});
   }
   
   sortChoices(choices) {
@@ -38,14 +52,22 @@ class VoteBallot extends React.Component {
   	});
   }
   
-  toggleChoice(id, selected) {
-  	let selectedChoices = { ...this.state.selectedChoices };
-  	if (selected) {
-  		selectedChoices[id] = true;
-  	} else {
+  toggleChoice(id, currentlySelected) {
+  	var selectedChoices = this.state.multipleAnswersAllowed ? { ...this.state.selectedChoices } : {};
+  	
+  	if (currentlySelected) {
   		delete selectedChoices[id];
+  	} else {
+  		selectedChoices[id] = true;
   	}
-  	this.setState({ selectedChoices: selectedChoices });
+  	
+  	let newChoices = this.state.choices.map((choice) => {
+  	    let newState = selectedChoices[choice.id] || false;
+  		return { ...choice,
+  				  selected: newState }
+  	});
+  	
+  	this.setState({ choices: newChoices, selectedChoices: selectedChoices });
   }
   
   getChoicesAsComponents() {
@@ -53,7 +75,8 @@ class VoteBallot extends React.Component {
   	  	return <BallotVotableChoice index={choice.id}
   	  						 		key={choice.id} 
   	  						 		text={choice.text} 
-  	  						 		toggle={this.toggleChoice.bind(this)}/>
+  	  						 		toggle={this.toggleChoice.bind(this)} 
+  	  						 		selected={choice.selected} />
   		});
   }
   

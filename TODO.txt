@@ -1,0 +1,23 @@
+* CREATE PAGE
+- Add options
+
+
+* VOTE PAGE
+- Enforce options
+- Show what options are there
+- Add asked date
+- Add share feature
+- Add go to results screen
+- Solve save to session issue
+
+
+* RESULTS PAGE
+- Add asked date
+x Adjust percentage bar on update
+X Fix display of votes and percentage
+
+
+* GENERAL
+- ADD MEDIA QUERIES
+- Create error page
+- Create ballot does not exist page

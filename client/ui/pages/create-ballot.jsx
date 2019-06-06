@@ -1,6 +1,7 @@
 import React from "react";
 import BallotQuestion from "../questions/ballot-editable-question.jsx";
 import BallotEditableChoice from "../choices/ballot-editable-choice.jsx";
+import BallotOptions from "../options/ballot-options.jsx";
 import Icons from "../utilities/icons.jsx";
 import Axios from 'axios';
 
@@ -12,7 +13,8 @@ class CreateBallot extends React.Component {
       question: 'Question',
       choices: {},
       choiceCount: 0,
-      options: {},
+      usersCanVoteMultipleTimes: false,
+      multipleAnswersAllowed:  false,
       invalidFields: {},
       submitted: false
     };
@@ -51,6 +53,18 @@ class CreateBallot extends React.Component {
   async modifyQuestion(newText) {
   	this.checkFieldValidity('question', newText);
   	return this.setState({ question: newText });
+  }
+  
+  toggleOption(option, newState) {
+    if (option === 'usersCanVoteMultipleTimes') {
+      this.setState({ usersCanVoteMultipleTimes: newState });
+      return;
+    }
+    
+    if (option === 'multipleAnswersAllowed') {
+      this.setState({ multipleAnswersAllowed: newState });
+      return;
+    }
   }
   
   checkFieldValidity(index, newText) {
@@ -106,7 +120,10 @@ class CreateBallot extends React.Component {
   	let ballotInfo = {
   		question: this.state.question,
   		choices: this.state.choices,
-  		options: this.state.options
+  		options: {
+  			usersCanVoteMultipleTimes: this.state.usersCanVoteMultipleTimes,
+  			multipleAnswersAllowed: this.state.multipleAnswersAllowed
+  		}
   	}
   	
   	let postInfo = await Axios.post('/ballots', ballotInfo);
@@ -126,15 +143,11 @@ class CreateBallot extends React.Component {
           <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
-          <button className="circle-btn ballot__add-choice-button" 
-          		  onClick={() => { this.addChoice(); } } >
-          		  	<svg className="ballot__add-choice-icon">
-          		  		<use xlinkHref={Icons.PLUS}></use>
-          		  	</svg> 
-          </button>
+          <BallotOptions addChoice={this.addChoice.bind(this)} 
+          				 toggleOption={this.toggleOption.bind(this)}/>
         </div>
         <button className="main-btn ballot__submit-button"
-        		onClick={this.submitBallot.bind(this)}> 
+        		onClick={this.submitBallot.bind(this)} >
         		Submit 
         </button>
       </div>

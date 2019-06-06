@@ -1,12 +1,12 @@
 const db = require('../db/dbController.js');
 const { ballot, choice } = require('../db/schemas.js');
-
 const handler = {};
 
 handler.postBallot = async(ballotInfo) => {
 	let newBallot = await ballot.create({
 		question: ballotInfo.question,
-		multipleChoices: true
+		usersCanVoteMultipleTimes: ballotInfo.options.usersCanVoteMultipleTimes,
+		multipleAnswersAllowed: ballotInfo.options.multipleAnswersAllowed
 	});
 	
 	let ballotId = newBallot.get('id');

@@ -1,0 +1,81 @@
+.ballot-options {
+    display: flex;
+	height: 5rem;
+	width: 100%;
+	color: black;
+	align-items: center;
+	
+  &__add-choice-button {
+  	flex: 1;
+    position: relative;
+    border: 2px solid $color-primary;
+    min-width: 2.5rem;
+    min-height: 2.5rem;
+    max-width: 2.5rem;
+    max-height: 2.5rem;
+    transition: all .2s;
+    background-color: transparent;
+    backface-visibility: hidden;
+    margin-top: 1rem;
+    margin-right: 5rem;
+  }
+  
+  &__add-choice-icon {
+  	display: block;
+  	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1) translateZ(0);
+    height: 0.7rem;
+    width: 2rem;
+    transition: all .2s;
+    fill: $color-primary;
+  }
+  
+  &__option {
+    display: flex;
+  	flex: 1;
+  	justify-content: center;
+  	align-items: center;
+  	transform: translateY(.5rem);	// needs to match height with add choice btn
+  }
+  
+  &__option-text {
+    flex: 4;
+    font-size: 1.5rem;
+    color: $color-primary;
+    margin-top: 0.5rem;
+    transform: translateY(-.2rem);	// needs to match height with checkbox
+  }  
+  
+  &__option-checkbox {
+    position: relative;
+  	flex: 1;
+  	width: .5rem;
+  	height: 1.5rem;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: $color-primary;
+  	}
+  }
+  
+  &__option-checkbox-icon {
+  	position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1);
+  	height: 1rem;
+    width: 1rem;
+    z-index: 10;
+    fill: $color-white;
+  }
+}

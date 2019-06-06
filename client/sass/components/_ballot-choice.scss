@@ -10,24 +10,6 @@
     box-shadow: $box-shadow-light;
   }
 
-  &__choice-checkbox {
-    flex: 1 0;
-    position: relative;
-    cursor: pointer;
-
-    &::after {
-      content: "";
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 1.5rem;
-      height: 1.5rem;
-      background-color: $color-primary;
-    }
-  }
-
   &__choice-text {
     flex: 2 0;
     color: $color-primary;
@@ -73,6 +55,24 @@
     width: 2rem;
     transition: all .2s;
     fill: $color-primary;
+  }
+  
+  &__choice-checkbox {
+    flex: 1 0;
+    position: relative;
+    cursor: pointer;
+
+    &::after {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 1.5rem;
+      height: 1.5rem;
+      background-color: $color-primary;
+    }
   }
   
   &__choice-checkbox-icon {
