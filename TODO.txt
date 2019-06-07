@@ -1,19 +1,14 @@
 * CREATE PAGE
 - Store data in session storage
-- 
-
+- Show error if user tried to submit with invalid fields
 
 * VOTE PAGE
-- Add asked date
 - Add share feature
-
+- Show error if user tried to submit with selecting a vote
 
 * RESULTS PAGE
-- Add asked date
 - Add share feature
 
-
 * GENERAL
-X ADD MEDIA QUERIES
 - Create error page
 - Spice up ballot does not exist page

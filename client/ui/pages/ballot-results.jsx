@@ -2,6 +2,7 @@ import React from "react";
 import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotReadonlyChoice from "../choices/ballot-readonly-choice.jsx";
 import BallotNonexistant from './ballot-nonexistant.jsx';
+import DateDisplay from "../utilities/date-display.jsx";
 import Axios from 'axios';
 
 class BallotResults extends React.Component {
@@ -13,7 +14,8 @@ class BallotResults extends React.Component {
       question: 'Question',
       choices: {},
       updateInterval: 3000,
-      ballotExists: true
+      ballotExists: true,
+      ballotCreatedOn: null
     };
   }
   
@@ -34,7 +36,8 @@ class BallotResults extends React.Component {
   		this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
   						choices:  sortedChoices,
-  						ballotExists: true });
+  						ballotExists: true,
+  						ballotCreatedOn: data.ballot.createdAt });
   	} else {
   		this.setState({ ballotExists: false });
   	}
@@ -89,6 +92,7 @@ class BallotResults extends React.Component {
           <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }
           </div>
+          <DateDisplay date={this.state.ballotCreatedOn} />
         </div>
       </div>
     );

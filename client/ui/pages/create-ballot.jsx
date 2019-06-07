@@ -3,6 +3,7 @@ import BallotQuestion from "../questions/ballot-editable-question.jsx";
 import BallotEditableChoice from "../choices/ballot-editable-choice.jsx";
 import BallotOptions from "../options/ballot-options.jsx";
 import PB_Button from "../utilities/pb-button.jsx";
+import Spinner from "../utilities/spinner.jsx";
 import Icons from "../utilities/icons.jsx";
 import Axios from 'axios';
 
@@ -154,6 +155,7 @@ class CreateBallot extends React.Component {
         
         <div className="btn-container">
         	<PB_Button text="Submit" onSubmit={this.submitBallot.bind(this)} />
+        	<Spinner active={this.state.submitted} />
         </div>
       </div>
     );
