@@ -29,22 +29,6 @@ html {
 body {
   box-sizing: border-box;
   background-color: $color-primary;
-  
-  @include respond(tablet) {
-        background-color: blue;
-    }
-
-    @include respond(tablet-md) {
-        background-color: orange;
-    }
-
-    @include respond(mobile-lg) {
-        background-color: yellow;
-    }
-
-    @include respond(slick) {
-        background-color: pink;
-    }
 }
 
 ::selection {

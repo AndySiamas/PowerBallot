@@ -14,6 +14,6 @@
 
 
 * GENERAL
-- ADD MEDIA QUERIES
+X ADD MEDIA QUERIES
 - Create error page
 - Spice up ballot does not exist page
