@@ -1,0 +1,49 @@
+/* BREAKPOINTS
+    - computer-lg: 72em (1440px)
+    - laptop: 55em (880px)
+    - tablet: 48em (768px)
+    - tablet-md: 43.75 (700px)
+    - tablet-sm: 40.625em (650px)
+    - mobile-lg: 26.5625em (425px)
+    - mobile-md: 23.4375em (375px)
+    - slick: 15em (<= 300px)
+*/
+
+@mixin respond($breakpoint) {
+
+    @if $breakpoint == computer-lg {
+        @media only screen and (max-width: 250em) { @content; }
+    }
+
+    @if $breakpoint == computer-md {
+        @media only screen and (max-width: 150em) { @content; }
+    }
+
+    @if $breakpoint == laptop {
+        @media only screen and (max-width: 55em) { @content; }
+    }
+
+    @if $breakpoint == tablet {
+        @media only screen and (max-width: 48em) { @content; }
+    }
+
+    @if $breakpoint == tablet-md {
+        @media only screen and (max-width: 42em) { @content; }
+    }
+
+    @if $breakpoint == tablet-sm {
+        @media only screen and (max-width: 35em) { @content; }
+    }
+
+    @if $breakpoint == mobile-lg {
+        @media only screen and (max-width: 30em) { @content; }
+    }
+
+    @if $breakpoint == mobile-md {
+        @media only screen and (max-width: 23.4375em) { @content; }
+    }
+
+    @if $breakpoint == slick {
+        @media only screen and (max-width: 15em) { @content; }
+    }
+}

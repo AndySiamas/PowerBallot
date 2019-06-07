@@ -59,8 +59,10 @@
   
   &__choice-checkbox {
     flex: 1 0;
+    width: 50%;
     position: relative;
     cursor: pointer;
+    margin: 1rem 1rem;
 
     &::after {
       content: "";

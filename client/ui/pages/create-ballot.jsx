@@ -151,8 +151,10 @@ class CreateBallot extends React.Component {
           				 toggleOption={this.toggleOption.bind(this)} />
           				 
         </div>
-        	
-        <PB_Button text="Submit" onSubmit={this.submitBallot.bind(this)} />
+        
+        <div className="btn-container">
+        	<PB_Button text="Submit" onSubmit={this.submitBallot.bind(this)} />
+        </div>
       </div>
     );
   }

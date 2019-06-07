@@ -5,6 +5,7 @@
 @import 'abstracts/variables';
 
 // base
+@import 'base/mediaQueries';
 @import 'base/base';
 @import 'base/typography';
 
@@ -16,4 +17,4 @@
 @import 'components/line-break';
 
 // layout
-@import 'layout/create-ballot';
+@import 'layout/ballot';

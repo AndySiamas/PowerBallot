@@ -131,8 +131,11 @@ class VoteBallot extends React.Component {
           					selected={this.state.multipleAnswersAllowed}/>
           </div>
         </div>
-        <PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
-        <PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
+        
+        <div className="btn-container">
+        	<PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
+        	<PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
+        </div>
       </div>
     );
     }
