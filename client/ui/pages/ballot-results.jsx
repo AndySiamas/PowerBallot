@@ -1,6 +1,7 @@
 import React from "react";
 import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotReadonlyChoice from "../choices/ballot-readonly-choice.jsx";
+import BallotNonexistant from './ballot-nonexistant.jsx';
 import Axios from 'axios';
 
 class BallotResults extends React.Component {
@@ -11,7 +12,8 @@ class BallotResults extends React.Component {
 	  ballotId: 0,
       question: 'Question',
       choices: {},
-      updateInterval: 3000
+      updateInterval: 3000,
+      ballotExists: true
     };
   }
   
@@ -31,7 +33,10 @@ class BallotResults extends React.Component {
   	if (data.ballot != null) {
   		this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
-  						choices:  sortedChoices });
+  						choices:  sortedChoices,
+  						ballotExists: true });
+  	} else {
+  		this.setState({ ballotExists: false });
   	}
   	
   	return sortedChoices;
@@ -73,6 +78,9 @@ class BallotResults extends React.Component {
   }
 
   render() {
+  	if (!this.state.ballotExists) {
+    	return <BallotNonexistant />
+    } else {
     return (
       <div className="ballot">
         <h1 className="ballot__header">Results</h1>
@@ -84,6 +92,7 @@ class BallotResults extends React.Component {
         </div>
       </div>
     );
+    }
   }
 }
 

@@ -1,4 +1,5 @@
 * CREATE PAGE
+- Store data in session storage
 - 
 
 
