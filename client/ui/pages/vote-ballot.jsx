@@ -3,7 +3,8 @@ import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotVotableChoice from "../choices/ballot-votable-choice.jsx";
 import ReadonlyOption from "../options/readonly-option.jsx";
 import PB_Button from "../utilities/pb-button.jsx";
-import BallotNonexistant from './ballot-nonexistant.jsx';
+import BallotNonexistant from "./ballot-nonexistant.jsx";
+import DateDisplay from "../utilities/date-display.jsx";
 import Axios from 'axios';
 
 class VoteBallot extends React.Component {
@@ -17,7 +18,8 @@ class VoteBallot extends React.Component {
       selectedChoices: {},
       multipleAnswersAllowed: false,
       usersCanVoteMultipleTimes: false,
-      ballotExists: true
+      ballotExists: true,
+      ballotCreatedOn: null
     };
   }
   
@@ -34,15 +36,16 @@ class VoteBallot extends React.Component {
   	let sortedChoices = this.sortChoices(choicesWithNewProps);
   	
   	if (data.ballot != null) {
-  		this.setState({ ballotId: ballotId,
+  		return this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
   						choices:  sortedChoices,
   						multipleAnswersAllowed: data.ballot.multipleAnswersAllowed, 
   						usersCanVoteMultipleTimes: data.ballot.usersCanVoteMultipleTimes,
-  						ballotExists: true
+  						ballotExists: true,
+  						ballotCreatedOn: data.ballot.createdAt
   					  });
   	} else {
-  		this.setState({ ballotExists: false });
+  		return this.setState({ ballotExists: false });
   	}
   }
   
@@ -130,12 +133,15 @@ class VoteBallot extends React.Component {
           	<ReadonlyOption text={"Multiple answers allowed"} 
           					selected={this.state.multipleAnswersAllowed}/>
           </div>
+          
+          <DateDisplay date={this.state.ballotCreatedOn} />
         </div>
         
         <div className="btn-container">
         	<PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
         	<PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
         </div>
+
       </div>
     );
     }
