@@ -35,7 +35,7 @@ class CreateBallot extends React.Component {
   async addChoice(text = 'Option') {
     let index = this.state.choiceCount + 1;
   	let newChoices = { ...this.state.choices };
-  	newChoices[index] = { index, text, isValid: false };
+  	newChoices[index] = { index, text, isValid: true };
   	return this.setState({ choices : newChoices, choiceCount: index }); 
   }
   
@@ -82,6 +82,7 @@ class CreateBallot extends React.Component {
   			choices[index].isValid = true;
   		}
   	}
+  	
   	else if (!this.state.invalidFields[index] && newText.length <= 0) {
   		newInvalidFields = { ...this.state.invalidFields };
   		newInvalidFields[index] = true;
@@ -108,11 +109,13 @@ class CreateBallot extends React.Component {
   }
   
   ballotIsValid() {
-    return Object.keys(this.state.invalidFields).length == 0;
-  }  
+    let noInvalidFields = (Object.keys(this.state.invalidFields).length == 0);
+    let multipleChoices = (Object.keys(this.state.choices).length > 1);
+    return noInvalidFields && multipleChoices;
+  }
   
   async submitBallot() {
-  	if (!this.ballotIsValid || this.state.submitted) {
+  	if (!this.ballotIsValid() | this.state.submitted) {
   		console.log('BALLOT IS INVALID');
   		return;
   	}
