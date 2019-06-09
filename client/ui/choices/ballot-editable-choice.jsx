@@ -33,11 +33,21 @@ class BallotVotableChoice extends React.Component {
     }, this.state.fadeoutTime * 1000);
   }
 
+  getErrorIcon() {
+  	if (!this.props.isValid) {
+  		return (<svg className="ballot__error-icon">
+      				<use xlinkHref={Icons.DELETE} />
+      			</svg>
+      			);
+  	}
+  }
+
   render() {
     return (
-      <div
-        className={`ballot__choice-container ${this.state.opacityClass}`}
-      >
+      <div className={`ballot__choice-container ${this.state.opacityClass}`}>
+      	<div className="ballot__error-container">
+      		{ this.getErrorIcon() }
+      	</div>
         <textarea
           className="ballot__choice-text"
           placeholder="Option"
