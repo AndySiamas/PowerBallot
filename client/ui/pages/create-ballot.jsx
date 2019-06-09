@@ -17,6 +17,7 @@ class CreateBallot extends React.Component {
       choiceCount: 0,
       usersCanVoteMultipleTimes: false,
       multipleAnswersAllowed:  false,
+      questionIsValid: true,
       invalidFields: {},
       submitted: false
     };
@@ -78,7 +79,7 @@ class CreateBallot extends React.Component {
   		delete newInvalidFields[index];
   		
   		if (index != 'question') {
-  			choices = { ...this.state.choices };
+  		    choices = { ...this.state.choices };
   			choices[index].isValid = true;
   		}
   	}
@@ -93,8 +94,11 @@ class CreateBallot extends React.Component {
   		}
   	}
   	
-  	if (newInvalidFields && choices) 
-  		this.setState({ invalidFields: newInvalidFields, choices: choices });
+  	if (newInvalidFields) 
+  		this.setState({ invalidFields: newInvalidFields });
+  		
+  	if (choices)
+  		this.setState({ choices: choices });
   }
   
   getChoicesAsComponents() {
@@ -145,7 +149,8 @@ class CreateBallot extends React.Component {
         <div className="ballot__container">
         
           <BallotQuestion text={this.state.question} 
-          				  modify={this.modifyQuestion.bind(this)} />
+          				  modify={this.modifyQuestion.bind(this)} 
+          				  isValid={this.state.questionIsValid} />
           				  
           <div className="ballot__choices-box">
           	{ this.getChoicesAsComponents() }

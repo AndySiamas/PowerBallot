@@ -42,21 +42,42 @@
     	width: 90%;
     }
   }
-
+  
   &__question {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+
+  &__question-text {
     font-family: $font-primary;
-    min-width: 100%;
-    max-width: 100%;
     min-height: 4rem;
     font-size: 3rem;
     word-break: break-word;
     color: $color-primary;
+    width: 95%;
+    
     border: none;
     resize: none;	// resizing is automatic
 
     &:active, &:focus {
       outline: none;
     }
+  }
+  
+  &__question-error-container {
+  	position: absolute;
+    fill: $color-primary;
+    top: 25%;
+    left: -1rem;
+  	color: black;
+  }
+  
+  &__question-error-icon {
+  	width: 1.5rem;
+  	height: 1.5rem;
   }
 
   &__choices-box {
