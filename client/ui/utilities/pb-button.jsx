@@ -8,8 +8,8 @@ class PB_Button extends React.Component {
   render() {
     return (
 		<button className="main-btn ballot__submit-button"
-        		onClick={this.props.onSubmit} >
-        		{ this.props.text }
+        		onClick={this.props.onSubmit}>
+        		<p className="main-btn__text"> { this.props.text } </p>
         </button>
     );
   }
