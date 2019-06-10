@@ -9,4 +9,6 @@ h1 {
   font-size: 3rem;
   padding: 2rem;
   text-decoration: underline;
+  text-shadow: $text-shadow-med;
+  user-select: none;
 }

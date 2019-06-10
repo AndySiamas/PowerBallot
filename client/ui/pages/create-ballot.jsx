@@ -144,7 +144,7 @@ class CreateBallot extends React.Component {
   render() {
     return (
       <div className="ballot">
-        <h1 className="ballot__header">Create your ballot</h1>
+        <h2 className="ballot__header">Create your ballot</h2>
         <div className="ballot__container">
         
           <BallotQuestion text={this.state.question} 

@@ -3,7 +3,8 @@
     flex-direction: column;
     align-items: center;
     width: 50%;
-    margin: 2rem 0rem;
+    margin-top: 2rem;
+    margin-bottom: 5rem;
 
     &__header {
         font-size: 3rem;
@@ -46,6 +47,7 @@
         transition: all 0.05s;
         border-radius: 5px;
         box-shadow: $box-shadow-light;
+        user-select: none;
 
         &:active, &:focus {
             outline: none;
