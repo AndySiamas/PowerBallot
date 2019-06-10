@@ -7,6 +7,7 @@ import ShareBallot from "../utilities/share-ballot.jsx";
 import BallotNonexistant from "./ballot-nonexistant.jsx";
 import DateDisplay from "../utilities/date-display.jsx";
 import Axios from 'axios';
+import { throws } from "assert";
 
 class VoteBallot extends React.Component {
   constructor(props) {
@@ -16,7 +17,8 @@ class VoteBallot extends React.Component {
 	  ballotId: 0,
       question: 'Question',
       choices: {},
-      selectedChoices: {},
+	  selectedChoices: {},
+	  didUserVote: false,
       multipleAnswersAllowed: false,
       usersCanVoteMultipleTimes: false,
       ballotExists: true,
@@ -25,7 +27,7 @@ class VoteBallot extends React.Component {
   }
   
   componentDidMount() {
-  	this.loadBallot();
+	  this.loadBallot();
   }
   
   async loadBallot() {
@@ -37,7 +39,7 @@ class VoteBallot extends React.Component {
   	let sortedChoices = this.sortChoices(choicesWithNewProps);
   	
   	if (data.ballot != null) {
-  		return this.setState({ ballotId: ballotId,
+  		await this.setState({ ballotId: ballotId,
   						question: data.ballot.question,
   						choices:  sortedChoices,
   						multipleAnswersAllowed: data.ballot.multipleAnswersAllowed, 
@@ -46,8 +48,15 @@ class VoteBallot extends React.Component {
   						ballotCreatedOn: data.ballot.createdAt
   					  });
   	} else {
-  		return this.setState({ ballotExists: false });
-  	}
+  		await this.setState({ ballotExists: false });
+	  }
+	  
+	this.checkIfUserVoted();
+  }
+
+  checkIfUserVoted() {
+	let didUserVote = localStorage.getItem(`ballot ${this.state.ballotId}`) || false;
+	this.setState({ didUserVote: didUserVote });
   }
   
   addPropsToChoices(choices) {
@@ -94,19 +103,27 @@ class VoteBallot extends React.Component {
   verifyVote() {
   	if (this.state.usersCanVoteMultipleTimes) return true;
   	
-    let userDidVote = localStorage.getItem(`ballot ${this.state.ballotId}`) || false;
-    if (!userDidVote) {
+    if (!this.state.didUserVote) {
     	localStorage.setItem(`ballot ${this.state.ballotId}`, true);
     	return true;
-    }
+	}
     
     return false;
+  }
+
+  getSubmitButton() {
+	  if (!this.state.didUserVote || this.state.usersCanVoteMultipleTimes)
+	  	return (
+			<PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
+		  );
   }
 
   async submitVote() {
     let selectedChoiceIds = Object.keys(this.state.selectedChoices);
   	if (selectedChoiceIds.length <= 0 || !this.verifyVote()) return false;
-  	
+	  
+	console.log('nice');
+
   	let data = await Axios.post('/votes', this.state.selectedChoices);
   	if (data.statusText == "OK") this.goToResultsPage();
   	return data;
@@ -139,7 +156,7 @@ class VoteBallot extends React.Component {
         </div>
         
         <div className="btn-container">
-        	<PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
+        	{ this.getSubmitButton() }
         	<PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
         </div>
 
