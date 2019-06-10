@@ -3,3 +3,10 @@ body {
   color: $color-white;
 }
 
+h1 {
+  font-family: 'Acme', sans-serif;
+  color: $color-white;
+  font-size: 3rem;
+  padding: 2rem;
+  text-decoration: underline;
+}

@@ -3,6 +3,7 @@ import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotReadonlyChoice from "../choices/ballot-readonly-choice.jsx";
 import BallotNonexistant from './ballot-nonexistant.jsx';
 import DateDisplay from "../utilities/date-display.jsx";
+import ShareBallot from "../utilities/share-ballot.jsx";
 import Axios from 'axios';
 
 class BallotResults extends React.Component {
@@ -94,6 +95,7 @@ class BallotResults extends React.Component {
           </div>
           <DateDisplay date={this.state.ballotCreatedOn} />
         </div>
+        <ShareBallot url={window.location.href} />
       </div>
     );
     }

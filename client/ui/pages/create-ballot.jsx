@@ -17,7 +17,6 @@ class CreateBallot extends React.Component {
       choiceCount: 0,
       usersCanVoteMultipleTimes: false,
       multipleAnswersAllowed:  false,
-      questionIsValid: true,
       invalidFields: {},
       submitted: false
     };

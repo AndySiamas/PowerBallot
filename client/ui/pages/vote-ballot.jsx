@@ -3,6 +3,7 @@ import BallotReadonlyQuestion from "../questions/ballot-readonly-question.jsx";
 import BallotVotableChoice from "../choices/ballot-votable-choice.jsx";
 import ReadonlyOption from "../options/readonly-option.jsx";
 import PB_Button from "../utilities/pb-button.jsx";
+import ShareBallot from "../utilities/share-ballot.jsx";
 import BallotNonexistant from "./ballot-nonexistant.jsx";
 import DateDisplay from "../utilities/date-display.jsx";
 import Axios from 'axios';
@@ -141,6 +142,8 @@ class VoteBallot extends React.Component {
         	<PB_Button text="Submit" onSubmit={this.submitVote.bind(this)} />
         	<PB_Button text="Go to results" onSubmit={this.goToResultsPage.bind(this)} />
         </div>
+
+		<ShareBallot url={window.location.href} />
 
       </div>
     );
