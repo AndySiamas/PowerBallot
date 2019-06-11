@@ -1,0 +1,19 @@
+.header {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    animation: scale-and-fade-in 1s;
+
+    &__text {
+        font-size: 3rem;
+        padding: 2rem 0rem 2rem 2rem;
+        text-decoration: underline;
+        text-shadow: $text-shadow-med;
+        user-select: none;
+    }
+
+    &__logo {
+        width: 5rem;
+        height: 5rem;
+    }
+}
