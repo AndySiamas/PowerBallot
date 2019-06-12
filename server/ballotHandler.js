@@ -1,4 +1,3 @@
-const db = require('../db/dbController.js');
 const { ballot, choice } = require('../db/schemas.js');
 const handler = {};
 
