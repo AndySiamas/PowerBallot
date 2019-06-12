@@ -5,7 +5,7 @@ const app = express();
 
 const ballotHandler = require('./ballotHandler.js');
 
-const PORT = process.env.PORT || 30000;
+const PORT = process.env.PORT || 30001;
 const PUBLIC_DIR = path.join(__dirname, '/../public');
 
 app.use(express.static(PUBLIC_DIR));
