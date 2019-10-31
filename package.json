@@ -30,7 +30,7 @@
     "react-dom": "^16.8.5",
     "react-router": "^5.0.0",
     "react-router-dom": "^5.0.0",
-    "sequelize": "^5.8.6",
+    "sequelize": "^5.15.1",
     "webpack": "^4.29.6",
     "webpack-cli": "^3.3.0"
   },
